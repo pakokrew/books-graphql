@@ -1,0 +1,83 @@
+query Books {
+  getBooks {
+    id
+    title
+    author {name}
+  }
+  getBook(title: "Sapiens") {
+    title
+    author {name}
+		#wiki
+  }
+  getAuthors {
+    id
+    name
+    age
+    books {
+      title
+    }
+  }
+  getAuthor(name: "Alain Damasio") {
+    name
+    age
+  }
+  getAuthorById(id: "53822950-7ce7-4f72-abab-e42700fd37ff") {
+    name
+    age
+  }
+}
+
+query AuthorBooksRec {
+  getAuthor(name: "yuval") {
+    name
+    age
+    books {
+      title
+      author {
+        name
+        books {
+          title
+          author {
+       			name
+            books {
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation AddAuthor($name: String!, $age: Int!) {
+  addAuthor(author: {name: $name, age: $age}) {
+    success
+    author {
+      name
+      age
+    }
+  }
+}
+
+mutation AddBook($title: String!, $authorId: ID!) {
+  addBook(book: {title: $title, authorId: $authorId}) {
+    success
+    book {
+      title
+      author {
+        name
+      }
+    }
+  }
+}
+
+mutation EditAuthor($id: ID!, $name: String, $age: Int) {
+  editAuthor(id: $id, editData: {name: $name, age: $age}) {
+    success
+    author {
+      id
+      name
+      age
+    }
+  }
+}
