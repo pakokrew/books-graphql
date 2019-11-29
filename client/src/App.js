@@ -31,7 +31,7 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         <header className="App-header">
-          Teubi
+          Books
         </header>
        <Main />
       </div>
